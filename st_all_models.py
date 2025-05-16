@@ -15,6 +15,28 @@ from skimage.feature import graycomatrix, graycoprops
 
 # ______________ naive bayes functions ______________
 
+def load_models():
+    try:
+        # Cek keberadaan file model
+        if not os.path.exists('naive_bayes_PSO_model.pkl'):
+            st.error("File naive_bayes_PSO_model.pkl tidak ditemukan!")
+            return None, None
+        
+        if not os.path.exists('naive_bayes_GA_model.pkl'):
+            st.error("File naive_bayes_GA_model.pkl tidak ditemukan!")
+            return None, None
+        
+        # Load model dengan joblib
+        pso_model = joblib.load('naive_bayes_PSO_model.pkl')
+        ga_model = joblib.load('naive_bayes_GA_model.pkl')
+        
+        st.success("Model berhasil dimuat.")
+        return pso_model, ga_model
+    except Exception as e:
+        st.error(f"Error loading models: {e}")
+        return None, None
+
+
 def extract_rgb(image):
     image = image.astype(np.float64)
     
@@ -151,6 +173,9 @@ def main():
     st.title("🌱 Klasifikasi Penyakit Daun Bibit Kelapa Sawit")
     st.write("📷 Upload gambar daun untuk klasifikasi penyakit")
 
+    pso_model, ga_model = load_models()
+    if pso_model is None or ga_model is None :
+        st.stop()
 
     uploaded_file = st.file_uploader("📂 Pilih gambar", type=['jpg', 'jpeg', 'png'])
 
@@ -169,8 +194,8 @@ def main():
         if 'Naive Bayes' in model_choice :
             if st.button('Classify'):
                 with st.spinner('Processing . . .'):
-                    pso_model = joblib.load('naive_bayes_PSO_model.pkl')
-                    ga_model = joblib.load('naive_bayes_GA_model.pkl')
+                    # pso_model = joblib.load('naive_bayes_PSO_model.pkl')
+                    # ga_model = joblib.load('naive_bayes_GA_model.pkl')
 
                     st.image(uploaded_file, caption='Uploaded Image')
 
