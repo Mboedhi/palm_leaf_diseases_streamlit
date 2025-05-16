@@ -169,15 +169,17 @@ def main():
         if 'Naive Bayes' in model_choice :
             if st.button('Classify'):
                 with st.spinner('Processing . . .'):
+                    pso_model = joblib.load('naive_bayes_PSO_model.pkl')
+                    ga_model = joblib.load('naive_bayes_GA_model.pkl')
 
                     st.image(uploaded_file, caption='Uploaded Image')
 
-                    try:
-                        pso_model = joblib.load('naive_bayes_PSO_model.pkl')
-                        ga_model = joblib.load('naive_bayes_GA_model.pkl')
-                    except:
-                        st.error("Error loading models. Please check if model files exist.")
-                        return
+                    # try:
+                    #     pso_model = joblib.load('naive_bayes_PSO_model.pkl')
+                    #     ga_model = joblib.load('naive_bayes_GA_model.pkl')
+                    # except:
+                    #     st.error("Error loading models. Please check if model files exist.")
+                    #     return
                     
                     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
                     image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
