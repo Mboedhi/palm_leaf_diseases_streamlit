@@ -11,10 +11,6 @@ import os, gdown
 import cv2, numpy as np, joblib
 from skimage.feature import graycomatrix, graycoprops
 
-def load_css(file_path):
-    with open(file_path) as f:
-        st.markdown(f'<style>{f.read()}</style>')
-
 # ______________ naive bayes functions ______________
 
 def extract_rgb(image):
