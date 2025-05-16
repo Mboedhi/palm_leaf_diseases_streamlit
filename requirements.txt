@@ -1,0 +1,10 @@
+streamlit
+torch
+torchvision
+numpy
+pillow
+opencv-python
+scikit-image
+joblib
+gdown
+requests
