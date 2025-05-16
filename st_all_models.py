@@ -8,7 +8,9 @@ import torch.nn as nn
 import pathlib
 import os, gdown
 
-import cv2, numpy as np, joblib
+import cv2
+import numpy as np
+import joblib
 from skimage.feature import graycomatrix, graycoprops
 
 # ______________ naive bayes functions ______________
